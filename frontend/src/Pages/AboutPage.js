@@ -1,50 +1,56 @@
-import React from 'react';
-// Import any necessary styling components (e.g., from a UI library or your CSS)
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.createElement("div");
+    container.style.maxWidth = "900px";
+    container.style.margin = "40px auto";
+    container.style.lineHeight = "1.6";
+    container.style.fontFamily = "Arial, sans-serif";
 
-const AboutPage = () => {
-  return (
-    <div className="about-container">
-      <h1>About ECORoute</h1>
-      
-      {/* 1. Intro Section */}
-      <section className="about-section" id="intro">
+    container.innerHTML = `
+        <h1>About ECORoute</h1>
         <h2>Making Every Journey Smarter</h2>
-        <p>We are a team of passionate developers based in Malaysia who recognized a critical flaw in everyday navigation. For too long, commuters have been forced to choose routes based only on speed, leading to hidden costs and invisible environmental damage. <strong>ECORoute</strong> was born to change that.</p>
-      </section>
 
-      {/* 2. Mission Section */}
-      <section className="about-section" id="mission">
-        <h3>Our Mission: Transparent Travel</h3>
-        <p>Our core mission is to bridge the gap between user priorities (saving money and saving time) and environmental responsibility. We aim to provide the most transparent routing options available, ensuring you have the data to make the best decision for your wallet and the planet.</p>
-      </section>
+        <p>
+            We are a group of passionate developers based in Malaysia who recognized
+            a critical flaw in everyday navigation. For too long, commuters have been
+            forced to choose routes only based on speed, leading to hidden fuel costs
+            and invisible environmental damage. ECORoute was born to change that.
+        </p>
 
-      {/* 3. The Difference Section - Highlighted Value */}
-      <section className="about-section" id="the-difference">
-        <h3>The ECORoute Difference</h3>
-        <p>We don't just show you the fastest route. Our unique, personalized methodology integrates four critical data points for every option:</p>
+        <h2>Our Mission: Transparent Travel</h2>
+        <p>
+            Our mission is to bridge the gap between user priorities—saving money,
+            saving time—and environmental responsibility. We provide the most
+            transparent routing decisions so users can make the best choice for their
+            wallet and the planet.
+        </p>
+
+        <h2>The ECORoute Difference</h2>
         <ul>
-          <li><strong>Time</strong></li>
-          <li><strong>Distance</strong></li>
-          <li><strong>Estimated Fuel Consumption</strong></li>
-          <li><strong>Estimated CO<sub>2</sub> Emission</strong></li>
+            <li>Time</li>
+            <li>Distance</li>
+            <li>Estimated Fuel Consumption</li>
+            <li>Estimated CO₂ Emission</li>
         </ul>
-        <p>By factoring in your specific car model and real-time traffic patterns, we provide the intelligence you need to choose the most efficient path.</p>
-      </section>
 
-      {/* 4. Impact Section */}
-      <section className="about-section" id="impact">
-        <h3>Driving Sustainable Change</h3>
-        <p>When you use ECORoute, you are contributing to a healthier environment. By making the <strong>CO<sub>2</sub> impact visible</strong>, we empower you to reduce your carbon footprint and actively contribute to lowering local pollution and haze. Small changes on your daily commute lead to big impacts for our communities.</p>
-      </section>
+        <p>
+            By factoring in your specific car model and real-time traffic patterns,
+            ECORoute enables you to choose the most efficient travel path.
+        </p>
 
-      {/* 5. Team Section */}
-      <section className="about-section" id="team">
-        <h3>Meet the Team</h3>
-        <p>We are [Your Team Name, e.g., Team Compass], a group dedicated to building smart, sustainable solutions for Southeast Asian commuters. Thank you for driving with us!</p>
-        {/* Optional: Add contact info or links */}
-      </section>
-    </div>
-  );
-};
+        <h2>Driving Sustainable Change</h2>
+        <p>
+            Using ECORoute helps reduce fuel waste, lower emissions, and minimize
+            air pollution. We believe small changes in daily travel behavior can
+            create a huge impact on our environment.
+        </p>
 
-export default AboutPage;
+        <h2>Meet the Team</h2>
+        <p>
+            We are <strong>Team KMPH</strong> — dedicated to building smart,
+            sustainable and impactful solutions for commuters in Southeast Asia.
+            Thank you for driving with us!
+        </p>
+    `;
+
+    document.body.appendChild(container);
+});
