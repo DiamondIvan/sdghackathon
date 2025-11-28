@@ -2,12 +2,8 @@ package com.example.backend.route;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.*;
-import org.springframework.core.ParameterizedTypeReference;
-
-import java.util.List;
-import java.util.Map;
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentResponse;
 
 @Service
 public class AIModelService {
@@ -15,10 +11,8 @@ public class AIModelService {
   @Value("${gemini.api.key}")
   private String apiKey;
 
-  @Value("${gemini.model:gemini-1.5-pro}")
+  @Value("${gemini.model:gemini-2.0-flash-lite}") // Use the configured Gemini model
   private String model;
-
-  private final RestTemplate restTemplate = new RestTemplate();
 
   /**
    * Sends user message to Gemini AI and returns the AI response.
@@ -32,47 +26,19 @@ public class AIModelService {
     }
 
     try {
-      // Gemini AI REST endpoint
-      String url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
+      Client client = Client.builder().apiKey(apiKey).build();
 
-      // Build JSON payload
-      String payload = """
-          {
-            "prompt": [{"text": "%s"}],
-            "temperature": 0.7,
-            "maxOutputTokens": 256
-          }
-          """.formatted(userMessage);
+      GenerateContentResponse response =
+          client.models.generateContent(
+              model, // Use the configured model
+              userMessage,
+              null); // No safety settings or other options for now
 
-      // Set headers
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.APPLICATION_JSON);
-      headers.setBearerAuth(apiKey);
-
-      HttpEntity<String> entity = new HttpEntity<>(payload, headers);
-
-      // Make POST request
-      ResponseEntity<Map<String, Object>> response = restTemplate.exchange(
-          url,
-          HttpMethod.POST,
-          entity,
-          new ParameterizedTypeReference<Map<String, Object>>() {
-          });
-
-      Map<String, Object> body = response.getBody();
-      if (body != null && body.containsKey("candidates")) {
-        Object candidatesObj = body.get("candidates");
-        if (candidatesObj instanceof List<?> candidatesList && !candidatesList.isEmpty()) {
-          Object firstCandidate = candidatesList.get(0);
-          if (firstCandidate instanceof Map<?, ?> firstMap) {
-            Object content = firstMap.get("content");
-            if (content != null)
-              return content.toString();
-          }
-        }
+      if (response != null && response.text() != null) {
+        return response.text();
+      } else {
+        return "AI did not return a response.";
       }
-
-      return "AI did not return a response.";
 
     } catch (Exception e) {
       // Log the error and return a friendly message
