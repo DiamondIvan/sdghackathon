@@ -66,6 +66,11 @@ public class AIGreenRouteService {
             String fuelPrediction = "Fuel prediction unavailable"; // Default to a descriptive message
             double parsedFuel = Double.MAX_VALUE; // Initialize with a high value, meaning prediction is not parsed or unavailable
 
+            String efficiencyClassification = "N/A";
+            String drivingRecommendation = "No specific recommendation.";
+            String peakHoursAdvice = "No specific peak hour advice.";
+            String fullPredictionSummary = "No AI prediction available."; // This is here, but before the others
+
             // Parse AI response
             if (aiResponse != null && !aiResponse.isEmpty()) {
                 // Extract Fuel
