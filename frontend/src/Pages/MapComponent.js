@@ -19,6 +19,7 @@ const MapComponent = ({ route }) => {
   const routeCoordinates = route.coordinates.map(coord => [coord.lat, coord.lng]);
   const center = routeCoordinates[0];
   const lineColor = route.color === 'green' ? 'green' : 'red'; // Use route.color, default to red
+  console.log("MapComponent received route.color:", route.color, "resulting lineColor:", lineColor);
 
   return (
     <MapContainer center={center} zoom={10} style={{ height: '100%', width: '100%' }}>

@@ -11,6 +11,13 @@ function GreenRouteDemo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Helper function to truncate text
+  const truncateText = (text, maxLength) => {
+    if (!text) return '';
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
+
   const handleStopChange = (index, value) => {
     const newStops = [...stops];
     newStops[index] = value;
@@ -137,7 +144,10 @@ function GreenRouteDemo() {
                   cursor: 'pointer',
                   backgroundColor: selectedRoute && selectedRoute.routeNumber === route.routeNumber ? '#e6f7ff' : 'white'
                 }}
-                onClick={() => setSelectedRoute(route)}
+                onClick={() => {
+                  console.log("Route selected:", route);
+                  setSelectedRoute(route);
+                }}
               >
                 <h4>
                   Route {route.routeNumber}: {route.content} 
@@ -158,7 +168,7 @@ function GreenRouteDemo() {
                 <p><strong>Distance:</strong> {route.distance}</p>
                 <p><strong>Duration:</strong> {route.duration}</p>
                 <p><strong>Fuel Used:</strong> {route.fuelUsed}</p>
-                <p><strong>AI Prediction:</strong> {route.fuelSavingPrediction}</p>
+                <p><strong>AI Prediction:</strong> {truncateText(route.fuelSavingPrediction, 250)}</p>
               </div>
             ))}
           </div>
@@ -172,7 +182,7 @@ function GreenRouteDemo() {
           <p><strong>Distance:</strong> {selectedRoute.distance}</p>
           <p><strong>Duration:</strong> {selectedRoute.duration}</p>
           <p><strong>Fuel Used:</strong> {selectedRoute.fuelUsed}</p>
-          <p><strong>AI Prediction:</strong> {selectedRoute.fuelSavingPrediction}</p>
+          <p><strong>AI Prediction:</strong> {truncateText(selectedRoute.fuelSavingPrediction, 250)}</p>
           <p><strong>Efficiency Color:</strong> <span style={{ color: selectedRoute.color, fontWeight: 'bold' }}>{selectedRoute.color ? selectedRoute.color.toUpperCase() : 'N/A'}</span></p>
         </div>
       )}
