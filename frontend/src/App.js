@@ -5,27 +5,35 @@ import HowItWorks from "./Pages/HowItWorks";
 import GreenRouteDemo from "./Pages/GreenRouteDemo";
 import CO2Calculator from "./Pages/CO2Calculator";
 import AboutPage from "./Pages/AboutPage";
-import './App.css';  // Import the CSS file
+import './App.css';
 
 function App() {
   return (
     <Router>
       <nav className="navbar">
+        
+        {/* LEFT SIDE LOGO */}
         <div className="logo">
           <Link to="/">
-            <img src="/EcoRouteLogo.png" alt="EcoRoute Logo" className="logo-image" />
+            <img
+              src="/EcoRouteLogo.png"
+              alt="EcoRoute Logo"
+              className="logo-image"
+            />
           </Link>
         </div>
-        
+
+        {/* CENTERED MENU */}
         <div className="menu">
           <Link to="/">Home</Link>
-          <Link to="/how-it-works">How It Works</Link>
-          <Link to="/demo">Green Route Demo</Link>
+          <Link to="/how-it-works">How it works</Link>
+          <Link to="/demo">EcoRouter</Link>
           <Link to="/calculator">CO₂ Calculator</Link>
-          <Link to="/about">About</Link>
+          <Link to="/about">About us</Link>
         </div>
       </nav>
 
+      {/* PAGE ROUTES */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/how-it-works" element={<HowItWorks />} />

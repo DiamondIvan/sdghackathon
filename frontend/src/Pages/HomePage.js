@@ -4,10 +4,36 @@ import './CssPages/HomePage.css';
 
 function HomePage() {
   return (
-    <div className="home-page">
-      <h1>Welcome to Your Routing Application</h1>
-      <p>Plan your trips efficiently. Your AI assistant is here to help!</p>
-      <Chatbot />
+    <div className="home-container">
+
+      {/* LEFT TEXT SECTION */}
+      <div className="text-section">
+        <h1 className="title">
+          Reach your<br />
+          destination<br />
+          <span className="highlight">faster, cheaper,</span><br />
+          and greener
+        </h1>
+
+        <p className="subtitle">
+          Let AI outsmart the traffic. EcoRoute analyses real-time data to 
+          automatically reroute you around jams, cutting your commute time 
+          and carbon footprint.
+        </p>
+
+        <button className="get-started-btn">Get Started</button>
+      </div>
+
+      {/* RIGHT HERO IMAGE */}
+      <div className="image-section">
+        <img
+          src="/Hero.png"
+          alt="EcoRoute Hero"
+          className="hero-image"
+        />
+      </div>
+
+      {/* OPTIONAL: Keep Chatbot below page */}
     </div>
   );
 }

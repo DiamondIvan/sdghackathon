@@ -1,46 +1,33 @@
-/* frontend/src/App.css */
-
+/* NAVBAR STYLING */
 .navbar {
-  /* Change padding: 1rem; to: */
-  padding: 3rem 1rem; /* 3rem Top/Bottom, 1rem Left/Right */
-
-  /* ... keep other styles ... */
+  padding: 3rem 1rem; /* matches thick bar in screenshot */
   display: flex;
-  justify-content: center;
+  justify-content: center; /* centers menu */
   align-items: center;
-  background-color: #449d44;
+  background-color: #2e8b57; /* screenshot green tone */
   color: white;
   position: relative;
 }
 
+/* LOGO LEFT SIDE */
 .logo {
-  font-weight: bold;
-  font-size: 1.5rem;
-
-  /* Keep it glued to the left */
   position: absolute;
-  left: 1rem;
-
-  /* ADD THESE 2 LINES to vertically center it perfectly: */
+  left: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.logo a,
-.logo a:visited {
-  color: white;
-  text-decoration: none;
-}
 .logo a {
   display: flex;
   align-items: center;
 }
+
 .logo-image {
-  height: 100px;
-  margin-right: 30px;
-  border-radius: 10px;
+  height: 75px; /* matches screenshot sizing */
+  border-radius: 8px;
 }
 
+/* MENU CENTER */
 .menu {
   display: flex;
   gap: 3rem;
@@ -50,15 +37,11 @@
 .menu a {
   color: white;
   text-decoration: none;
-  margin: 0 1rem;
-  font-size: 1.4rem;
-  font-family: "Comic Sans MS", sans-serif;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: Arial, sans-serif; /* modern & clean like screenshot */
 }
 
-.backend-message {
-  padding: 1rem;
-  background-color: #f0f0f0;
-  margin: 1rem;
-  border-radius: 5px;
+.menu a:hover {
+  text-decoration: underline;
 }
