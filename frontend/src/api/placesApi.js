@@ -1,3 +1,5 @@
+const API_BASE_URL = "https://sdghackathon-backend.onrender.com";
+
 export async function fetchAutocomplete(input) {
   const response = await fetch(
     `${API_BASE_URL}/api/places/autocomplete?input=${encodeURIComponent(input)}`

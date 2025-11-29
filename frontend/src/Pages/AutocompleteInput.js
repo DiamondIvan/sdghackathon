@@ -20,7 +20,7 @@ const AutocompleteInput = ({ value, onChange, onKeyDown, placeholder }) => {
             setSuggestions([]);
             return;
         }
-        fetch(`http://localhost:8080/places/autocomplete?input=${inputValue}`)
+        fetch(`https://sdghackathon-backend.onrender.com/api/places/autocomplete?input=${inputValue}`)
             .then(res => res.json())
             .then(data => {
                 setSuggestions(data);
