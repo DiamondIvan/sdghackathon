@@ -38,11 +38,20 @@ public class AIGreenRouteService {
             long distanceMeters = 0;
             long durationSeconds = 0;
 
+            // List to hold intermediate waypoints
+            List<RouteResponse.LatLng> intermediateWaypoints = new ArrayList<>();
+
             if (route.legs != null && route.legs.length > 0) {
                 distance = route.legs[0].distance.humanReadable;
                 duration = route.legs[0].duration.humanReadable;
                 distanceMeters = route.legs[0].distance.inMeters;
                 durationSeconds = route.legs[0].duration.inSeconds;
+
+                // Extract intermediate waypoints (endLocation of each leg, except the last one)
+                for (int i = 0; i < route.legs.length - 1; i++) {
+                    com.google.maps.model.LatLng legEndLocation = route.legs[i].endLocation;
+                    intermediateWaypoints.add(new RouteResponse.LatLng(legEndLocation.lat, legEndLocation.lng));
+                }
             }
 
             // Create a prompt for the AI model with more detailed requests
@@ -161,6 +170,7 @@ public class AIGreenRouteService {
                 }
             }
             routeResponse.setCoordinates(pathCoordinates);
+            routeResponse.setWaypoints(intermediateWaypoints); // Set the extracted intermediate waypoints
             routeResponses.add(routeResponse);
         }
 
