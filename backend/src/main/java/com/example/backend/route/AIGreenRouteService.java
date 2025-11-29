@@ -17,13 +17,6 @@ public class AIGreenRouteService {
     @Autowired
     private AIModelService aiModelService;
 
-    public DirectionsResult findBestRoute(DirectionsResult directionsResult) {
-        // For now, simply return the original directionsResult.
-        // The logic to determine the "best" route based on AI prediction will be implemented here.
-        processRoutes(directionsResult); // Process the routes to get AI predictions
-        return directionsResult;
-    }
-
     public List<RouteResponse> processRoutes(DirectionsResult result) {
         List<RouteResponse> routeResponses = new ArrayList<>();
 
@@ -174,22 +167,65 @@ public class AIGreenRouteService {
             routeResponses.add(routeResponse);
         }
 
-        // Find the most fuel-efficient route and mark it green
-        RouteResponse mostEfficientRoute = null;
-        double minFuel = Double.MAX_VALUE;
-
-        for (RouteResponse routeResponse : routeResponses) {
-            if (routeResponse.getParsedFuelConsumption() < minFuel) {
-                minFuel = routeResponse.getParsedFuelConsumption();
-                mostEfficientRoute = routeResponse;
+        // Sort routes to put the most fuel-efficient and potentially fastest first
+        routeResponses.sort((r1, r2) -> {
+            // Primary sort by parsedFuelConsumption (ascending - lower is better)
+            int fuelCompare = Double.compare(r1.getParsedFuelConsumption(), r2.getParsedFuelConsumption());
+            if (fuelCompare != 0) {
+                return fuelCompare;
             }
-            routeResponse.setColor("red"); // Default all to red first
-        }
+            // Secondary sort by durationSeconds (ascending - lower is better), if fuel consumption is similar
+            // Assuming duration can be parsed to seconds for comparison if needed, or using duration string directly
+            // For simplicity, we'll try to parse it from the human-readable string.
+            long duration1 = parseDurationToSeconds(r1.getDuration());
+            long duration2 = parseDurationToSeconds(r2.getDuration());
+            return Long.compare(duration1, duration2);
+        });
 
-        if (mostEfficientRoute != null) {
-            mostEfficientRoute.setColor("green"); // Mark the most efficient as green
+        // After sorting, mark the first route (the best one) as green
+        for (int i = 0; i < routeResponses.size(); i++) {
+            if (i == 0) {
+                routeResponses.get(i).setColor("green");
+            } else {
+                routeResponses.get(i).setColor("red");
+            }
         }
-
+        
         return routeResponses;
+    }
+
+    // Helper method to parse human-readable duration to seconds (rough estimation)
+    private long parseDurationToSeconds(String durationString) {
+        long totalSeconds = 0;
+        if (durationString == null || durationString.isEmpty()) {
+            return totalSeconds;
+        }
+
+        Pattern daysPattern = Pattern.compile("(\\d+)\\s*day");
+        Pattern hoursPattern = Pattern.compile("(\\d+)\\s*hour");
+        Pattern minsPattern = Pattern.compile("(\\d+)\\s*min");
+        Pattern secondsPattern = Pattern.compile("(\\d+)\\s*sec");
+
+        Matcher daysMatcher = daysPattern.matcher(durationString);
+        if (daysMatcher.find()) {
+            totalSeconds += Long.parseLong(daysMatcher.group(1)) * 24 * 60 * 60;
+        }
+
+        Matcher hoursMatcher = hoursPattern.matcher(durationString);
+        if (hoursMatcher.find()) {
+            totalSeconds += Long.parseLong(hoursMatcher.group(1)) * 60 * 60;
+        }
+
+        Matcher minsMatcher = minsPattern.matcher(durationString);
+        if (minsMatcher.find()) {
+            totalSeconds += Long.parseLong(minsMatcher.group(1)) * 60;
+        }
+        
+        Matcher secondsMatcher = secondsPattern.matcher(durationString);
+        if (secondsMatcher.find()) {
+            totalSeconds += Long.parseLong(secondsMatcher.group(1));
+        }
+
+        return totalSeconds;
     }
 }
