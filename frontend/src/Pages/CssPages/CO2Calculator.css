@@ -1,0 +1,48 @@
+.co2-calculator {
+  width: 100%;
+  max-width: 700px;
+  margin-top: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background: rgba(232, 245, 233, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.calculator-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.stat-text {
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+}
+
+.stat-text.highlight {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .stat-row {
+    flex-direction: column;
+  }
+  
+  .stat-text {
+    width: 100%;
+  }
+}

@@ -317,14 +317,30 @@ button:not([disabled]):hover {
 
 .selected-route-details h3 {
   margin-top: 0;
+  margin-bottom: 20px;
   color: #2c3e50;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 8px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .selected-route-details p {
   margin: 6px 0;
   line-height: 1.5;
+}
+
+.ai-prediction {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(76, 175, 80, 0.05);
+  border-left: 4px solid #4caf50;
+  border-radius: 4px;
+}
+
+.ai-prediction p {
+  margin: 0;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* Error message */
