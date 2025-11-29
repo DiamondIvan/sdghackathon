@@ -1,4 +1,4 @@
-package com.example.backend.route.config; // ⚠️ MAKE SURE THIS MATCHES YOUR PACKAGE
+package com.example.backend.config; // ⚠️ MAKE SURE THIS MATCHES YOUR PACKAGE
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,8 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Apply to all endpoints
                         .allowedOrigins(
-                                "http://localhost:5173", // Local React (Vite)
-                                "http://localhost:3000", // Local React (Create React App)
+                                "https://localhost:5173", // Local React (Vite)
+                                "https://localhost:3000", // Local React (Create React App)
                                 "https://sdghackathon-frontend.vercel.app/" // ⚠️ REPLACE THIS LATER WITH YOUR VERCEL
                                                                             // URL
                 )
