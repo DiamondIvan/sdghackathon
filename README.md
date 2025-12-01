@@ -1,5 +1,5 @@
 # To try the app, please click the link below
-https://chiyin47.github.io/sdghackathon-1/
+https://chiyin47.github.io/C1G6_KMPH_SourceCode/
 
 Note* : If error 404 appears, please use the link above again to reenter
 
